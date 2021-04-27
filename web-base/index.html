@@ -63,7 +63,7 @@
                 ]
             },
             methods: {
-                limpaformulario:function() {
+                limpaformulario:function() { //Aqui ele vai apagar todos os campos após adicionar o aluno
                     this.form ={
                         nome:'',
                         email:'',
@@ -72,7 +72,7 @@
                 },
                 adicionarAluno: function() {
                     //console.log(this.form)
-                    this.alunos.push(this.form)
+                    this.alunos.push(this.form) //Ele vai salvar o que foi para o form dentro da array alunos
                     this.limpaformulario()
                 },
                 
