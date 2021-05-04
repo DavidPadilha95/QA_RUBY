@@ -5,9 +5,12 @@ Dado('que acesso a página de cadastro') do
 end
   
 Quando('submeto o meu cadastro completo') do
-    pending # Write code here that turns the phrase above into concrete actions
+    find("#fullName").set "David padilha"
+    find("#email").set "david.teste@hotmail.com"
+    find( "#password").set "pwd123"
 end
   
 Então('sou redirecionado para o Dashboard') do
-    pending # Write code here that turns the phrase above into concrete actions
+   expect(page).to have_css ".dashboard"
+   sleep 10
 end
