@@ -15,11 +15,6 @@ Quando('submeto o seguinte formulario de cadastro:') do |table|
     click_button "Cadastrar"
 
 end
-  
-Então('sou redirecionado para o Dashboard') do
-   expect(page).to have_css ".dashboard"
-   sleep 10
-end
 
 Então('vejo a mensagem de alerta: {string}') do |mensagem_alerta| #Esse "então" vai ser utilizado para todos o steps
     alert = find(".alert dark")
