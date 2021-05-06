@@ -3,14 +3,25 @@ Dado('que acesso a página de cadastro') do
     find("#initialSign_1").click
     sleep 10
 end
-  
-Quando('submeto o meu cadastro completo') do
-    find("#fullName").set "David padilha"
-    find("#email").set "david.teste@hotmail.com"
-    find( "#password").set "pwd123"
+
+Quando('submeto o seguinte formulario de cadastro:') do |table|
+    log table.hashes #mostrando a conversao da tabela em array de objeto (É um objeto com array)
+    user = table.hashes.first #Convertendo a tabela em array e pegando a primeira linha
+    log user #mostrando a primeira linha do array que será usada
+
+    find("#fullName").set user[:nome]
+    find("#email").set user:[:email]
+    find( "#password").set user[:senha]
+    click_button "Cadastrar"
+
 end
   
 Então('sou redirecionado para o Dashboard') do
    expect(page).to have_css ".dashboard"
    sleep 10
+end
+
+Então('vejo a mensagem de alerta: {string}') do |mensagem_alerta| #Esse então vai ser utilizado para todos o steps
+    alert = find(".alert dark")
+    expect(alert.text). to eql mensagem_alerta
 end
