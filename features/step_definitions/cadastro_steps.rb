@@ -5,7 +5,7 @@ Dado('que acesso a página de cadastro') do
 end
 
 Quando('submeto o seguinte formulario de cadastro:') do |table|
-    log table.hashes #mostrando a conversao da tabela em array de objeto (É um objeto com array)
+    log table.hashes #mostrando a conversao da tabela em array de objeto
     user = table.hashes.first #Convertendo a tabela em array e pegando a primeira linha
     log user #mostrando a primeira linha do array que será usada
 
@@ -21,7 +21,7 @@ Então('sou redirecionado para o Dashboard') do
    sleep 10
 end
 
-Então('vejo a mensagem de alerta: {string}') do |mensagem_alerta| #Esse então vai ser utilizado para todos o steps
+Então('vejo a mensagem de alerta: {string}') do |mensagem_alerta| #Esse "então" vai ser utilizado para todos o steps
     alert = find(".alert dark")
     expect(alert.text). to eql mensagem_alerta
 end
