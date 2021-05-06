@@ -10,38 +10,28 @@ Funcionalidade: Cadastro
     Cenario: Fazer cadastro
         Dado que acesso a página de cadastro
         Quando submeto o seguinte formulario de cadastro:
-            |nome         |     email     |senha |
-            |David Padilha|david@teste.com|pwd123|
+            | nome          | email           | senha  |
+            | David Padilha | david@teste.com | pwd123 |
         Então sou redirecionado para o Dashboard
 
-    @tentativa_cadastro
-    Cenario: Submeter cadastro sem o nome
+
+    Esquema do Cenario: Tentativa de cadastro
+
         Dado que eu acesso a página de cadastro
         Quando submeto o seguinte formulario de cadastro:
-            |nome         |     email     |senha |
-            |             |david@teste.com|pwd123|
-        Então vejo a mensagem de alerta: "Oops. Informe seu nome completo!"
+            | nome         | email       | senha       |
+            | <nome_input> | email_input | senha_input |
+        Então vejo a mensagem de alerta: "<mensagem_output>"
 
-    @tentativa_cadastro
-    Cenario: submeter cadastro sem o email
-        Dado que acesso a página de cadastro
-        Quando submeto o seguinte formulario de cadastro:
-            |nome         |     email     |senha |
-            |David Padilha|               |pwd123|
-        Então vejo a mensagem de alerta: "Oops. Informe seu email valido!"
+        Exemplos:
+            | nome_input    | email_input     | senha_input | mensagem_output                  |
+            |               | david@teste.com | pwd123      | Oops. Informe seu nome completo! |
+            | David Padilha |                 | pwd123      | Oops. Informe seu email valido!  |
+            | David Padilha | david##kdj.com  | pwd123      | Oops. Informe seu email valido!  |
+            | David Padilha | david@teste.com |             | Oops. Informe sua senha secreta! |
 
-    @tentativa_cadastro
-    Cenario: submeter cadastro com o email incorreto
-        Dado que acesso a página de cadastro
-       Quando submeto o seguinte formulario de cadastro:
-            |nome         |     email     |senha |
-            |David Padilha|    dagfdgm    |pwd123|
-        Então vejo a mensagem de alerta: "Oops. Informe um email valido!"
+# O "Esquema do cenario" usamos quando o input(entrada) e output(saida) são iguais
+# Nesse caso a finalidade do teste é ver os possíveis cenários de erro por isso conseguimos
+# juntar tudo.
 
-    @tentativa_cadastro
-    Cenario: submeter cadastro sem a senha
-        Dado que acesso a página de cadastro
-        Quando submeto o seguinte formulario de cadastro:
-            |nome         |     email     |senha |
-            |David Padilha|david@teste.com|      |
-        Então vejo a mensagem de alerta: "Oops. Informe sua senha secreta!"
+#Usando o tituo das tabela dentro do cenario, ele vai executar linha por linha
