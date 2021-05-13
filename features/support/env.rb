@@ -4,5 +4,5 @@ require "faker"
 
 Capybara.configure do |config|
     config.default_driver = :selenium_chrome
-    config.app_host = "Url padrao"
+  #  config.app_host = "Url padrao"
 end
