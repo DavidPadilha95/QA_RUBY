@@ -9,14 +9,5 @@ Quando('submeto o seguinte formulario de cadastro:') do |table|
     user = table.hashes.first #Convertendo a tabela em array e pegando a primeira linha
     log user #mostrando a primeira linha do array que será usada
 
-    find("#fullName").set user[:nome]
-    find("#email").set user:[:email]
-    find( "#password").set user[:senha]
-    click_button "Cadastrar"
-
-end
-
-Então('vejo a mensagem de alerta: {string}') do |mensagem_alerta| #Esse "então" vai ser utilizado para todos o steps
-    alert = find(".alert dark")
-    expect(alert.text). to eql mensagem_alerta
+    @signup_page.create(user) 
 end

@@ -1,8 +1,6 @@
 Dado('que estou logado como {string} e {string}') do |email, password|
-    visit"..."
-    find("input[placeholder='Seu e-mail']").set email
-    find("input[type=password]").set password
-    click_button "Entrar"
+    @login_page.open
+    @login_page.with(email, password)
 end
   
 Dado('que acesso o formulario de cadastro de Anúncios') do
@@ -18,7 +16,7 @@ end
 Quando('submeto o cadastro desse item') do
 
     thumb = Dir.pwd + "/features/support/fixtures/images" + @anuncio[:thumb]
-    find("#thumbnail input[type=file]", visible:false).set
+    find("#thumbnail input[type=file]", visible:false).set #validar o elemneto mesmo se não estiver visivel
 
     find("input[placeholder$=equipamento]").set @anuncio[:nome] #o $ busca elementos com o final "equipamento" ^ começaria com "equipamento"
     find("#category").find('option', text: @anuncio[:categoria]).select_option

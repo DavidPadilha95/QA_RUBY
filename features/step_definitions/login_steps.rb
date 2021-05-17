@@ -1,9 +1,7 @@
-Dado('que acesso a pagina principal') do                                         
-    visit "..."
+Dado('que acesso a pagina principal') do                                 
+   @login_page.open
   end                                                                              
                                                                                    
   Quando('submeto minhas credenciais com {string} e {string}') do |email, password|
-    find("input[placeholder='Seu e-mail']").set email
-    find("input[type=password]").set password
-    click_button "Entrar"
+    @login_page.with(email, password)
   end                                                                              
