@@ -4,7 +4,7 @@ Dado('que estou logado como {string} e {string}') do |email, password|
 end
   
 Dado('que acesso o formulario de cadastro de Anúncios') do
-    click_button "Criar anúncio"
+    @dash_page.goto_equipo_form
     expect(page).to have_css "#equipoForm" #Isso é um checkpoint para garantir que estou no lugar certo
 end
 
@@ -14,15 +14,7 @@ Dado('que eu tenho o seguinte equipamento:') do |table|
 end
   
 Quando('submeto o cadastro desse item') do
-
-    thumb = Dir.pwd + "/features/support/fixtures/images" + @anuncio[:thumb]
-    find("#thumbnail input[type=file]", visible:false).set #validar o elemneto mesmo se não estiver visivel
-
-    find("input[placeholder$=equipamento]").set @anuncio[:nome] #o $ busca elementos com o final "equipamento" ^ começaria com "equipamento"
-    find("#category").find('option', text: @anuncio[:categoria]).select_option
-    find("input[placeholder^=Valor").set @anuncio[:preco] # ^começa com a palavra "Valor"
-
-    click_button "Cadastrar"
+    @equipos_page.create(@anuncio)
 end
   
 Então('devo ser esse item no meu Dashboard') do
