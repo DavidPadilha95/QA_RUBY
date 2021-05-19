@@ -1,4 +1,5 @@
 require_relative "routes/sessions" #como se eu estivesse importando essa rota
+require_relative "helpers"
 
 describe "Post /sessions" do
     context "login com sucesso" do
@@ -16,18 +17,21 @@ describe "Post /sessions" do
         end
     end
 
-    context "login com senha errada" do
-        before(:all) do #Before all diz para executar esse payload para todos os its dentro do contexto
-            payload = {email: "betao@yahoo.com", password: "tetete"}
-            @result = Session.new.login(payload)
-        end
-        
-        it "valida status code" do
-            expect(@result.code).to eql 401
+    
+    examples = Helpers::get_fixtures("login") #Passando o nome do meu arquivo yml
+
+    examples.each do |e|
+        context "#{e[:title]}" do
+         before(:all) do
+            @result = Session.new.login(e[:payload])
+         end
+
+        it "valida status code #{e[:code]}" do
+            expect(@result.code).to eql e[:code]
         end
       
         it "valida retorno do erro" do
-            expect(@result.parsed_response["_id"]).to eql "Unathourized"
+            expect(@result.parsed_response["error"]).to eql e[:error]
         end
     end
 end
